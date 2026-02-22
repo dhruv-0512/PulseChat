@@ -1,0 +1,124 @@
+.room-select-screen {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.room-select-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.room-select-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(22, 22, 30, 0.75);
+    backdrop-filter: blur(40px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: 48px 40px;
+    width: 400px;
+    max-width: 90vw;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    animation: cardFadeIn 0.5s ease;
+}
+
+.logo-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.logo-small h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.user-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.welcome-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-tertiary);
+}
+
+.welcome-avatar-dot {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--success);
+    border: 4px solid var(--bg-tertiary);
+}
+
+.user-welcome h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.instruction {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    font-size: 15px;
+}
+
+.room-select-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.room-select-card input {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.room-select-card input:focus {
+    border-color: var(--accent);
+}
+
+.join-room-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--accent), #6d28d9);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+.join-room-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
+}

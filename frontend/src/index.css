@@ -1,0 +1,66 @@
+/* ================================================
+   chatly — global styles
+   ================================================ */
+
+:root {
+  --bg-primary: #0f0f14;
+  --bg-secondary: #16161e;
+  --bg-tertiary: #1e1e2a;
+  --bg-hover: #252535;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --text-primary: #e4e4e7;
+  --text-secondary: #9898a6;
+  --text-muted: #5c5c6e;
+  --accent: #7c3aed;
+  --accent-light: #a78bfa;
+  --accent-cyan: #06b6d4;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+  height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* toast overrides */
+.Toastify__toast {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+}

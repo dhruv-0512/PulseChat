@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatly — Real-Time Chat</title>
+    <meta name="description" content="A sleek real-time chat application with rooms and live messaging.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- LANDING SCREEN -->
+    <div id="landing" class="landing-screen">
+        <div class="landing-bg">
+            <div class="bg-orb orb-1"></div>
+            <div class="bg-orb orb-2"></div>
+            <div class="bg-orb orb-3"></div>
+        </div>
+        <div class="landing-card">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="12" fill="url(#logo-grad)"/>
+                    <path d="M12 14h16a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4-4-4h-4a2 2 0 01-2-2v-8a2 2 0 012-2z" fill="rgba(255,255,255,0.9)"/>
+                    <defs>
+                        <linearGradient id="logo-grad" x1="0" y1="0" x2="40" y2="40">
+                            <stop stop-color="#7c3aed"/>
+                            <stop offset="1" stop-color="#06b6d4"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Chatly</h1>
+            </div>
+            <p class="tagline">Jump into real-time conversations</p>
+            <form id="join-form">
+                <input type="text" id="username-input" placeholder="Pick a username..." maxlength="20" autocomplete="off" autofocus>
+                <button type="submit" id="join-btn">
+                    <span>Join Chat</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </form>
+            <p id="join-error" class="error-msg"></p>
+        </div>
+    </div>
+
+    <!-- CHAT SCREEN -->
+    <div id="chat-app" class="chat-app hidden">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-small">
+                    <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+                        <rect width="40" height="40" rx="12" fill="url(#logo-grad2)"/>
+                        <path d="M12 14h16a2 2 0 012 2v8a2 2 0 01-2 2h-4l-4 4-4-4h-4a2 2 0 01-2-2v-8a2 2 0 012-2z" fill="rgba(255,255,255,0.9)"/>
+                        <defs>
+                            <linearGradient id="logo-grad2" x1="0" y1="0" x2="40" y2="40">
+                                <stop stop-color="#7c3aed"/>
+                                <stop offset="1" stop-color="#06b6d4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>Chatly</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">
+                    <span>Rooms</span>
+                    <button id="create-room-btn" title="Create Room">+</button>
+                </div>
+                <ul id="room-list" class="room-list"></ul>
+            </div>
+
+            <div class="sidebar-section online-section">
+                <div class="section-title">
+                    <span>Online</span>
+                    <span id="online-count" class="online-count">0</span>
+                </div>
+                <ul id="user-list" class="user-list"></ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="current-user">
+                    <div class="avatar-dot"></div>
+                    <span id="display-username"></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Chat Main -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                </button>
+                <div class="room-info">
+                    <h2 id="current-room-name"># general</h2>
+                    <span id="typing-indicator" class="typing-indicator"></span>
+                </div>
+            </header>
+
+            <div id="messages" class="messages-area">
+                <!-- messages get injected here -->
+            </div>
+
+            <form id="msg-form" class="message-form">
+                <input type="text" id="msg-input" placeholder="Type a message..." autocomplete="off" maxlength="1000">
+                <button type="submit" id="send-btn" title="Send">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <!-- Create Room Modal -->
+    <div id="room-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>Create a Room</h3>
+            <form id="room-form">
+                <input type="text" id="room-name-input" placeholder="Room name..." maxlength="20" autocomplete="off">
+                <div class="modal-actions">
+                    <button type="button" id="modal-cancel" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>
