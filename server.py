@@ -10,6 +10,9 @@ import uuid
 import base64
 
 app = Flask(__name__, static_folder='frontend/dist', static_url_path='')
+@app.route('/ping')
+def ping():
+    return 'pong', 200
 app.config['SECRET_KEY'] = 'dev-secret-key-change-in-prod'
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
